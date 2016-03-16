@@ -31,7 +31,8 @@ module.exports = function(grunt) {
     // Configuration to be run (and then tested).
     single_test: {
       options: {
-        framework: 'jasmine'
+        language: 'mocha',
+        framework: 'karma'
       },
       files: 'test/fixtures/**/*.js'
     },
@@ -58,6 +59,6 @@ module.exports = function(grunt) {
   grunt.registerTask('clean', ['clean']);
 
   // By default, lint and run all tests.
-  grunt.registerTask('default', ['jshint', 'single_test']);
+  grunt.registerTask('default', ['single_test']);
 
 };

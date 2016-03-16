@@ -10,35 +10,34 @@
 
 module.exports = function(grunt) {
 
-  // Please see the Grunt documentation for more information regarding task
-  // creation: http://gruntjs.com/creating-tasks
-  var JASMINE_SINTAX = {
-    all : "describe('",
-    only: "fdescribe('"
+  var files_control = require('./lib/files_control')(grunt);
+  var ReplaceText = require('./lib/replace_text')(grunt);
+
+  var ERRORS = {
+    1: 'Describe option is not defined.',
+    2: 'Describe was not found. Please put a exists test.'
   };
-  var MOCHA_SINTAX = {
-    all : "describe('",
-    only: "fdescribe('"
-  };
-  var frameworkSintax;
-  grunt.registerMultiTask('single_test', 'Grunt task to run single tests', function() {
-    // Iterate over all specified file groups.
+
+  // Register single test task
+  grunt.registerMultiTask('single_test', 'run single tests', function() {
+    var self = this;
+    var name = self.name || 'single_test';
     var options = this.options({});
+    var describeOption = grunt.option('describe');
 
-    this.files.forEach(function(f) {
-      f.src.filter(function(filepath){
-        var decoradorScenario = options.framework === 'jasmine' ? JASMINE_SINTAX : MOCHA_SINTAX;
-        var grepText = decoradorScenario.all + grunt.option('describe');
-        var content = grunt.file.read(filepath);
-        var newContent = content.replace(grepText, decoradorScenario.only + grunt.option('describe'));
+    if(typeof grunt.option('describe') === 'undefined') {
+      grunt.fail.warn(ERRORS[1]);
+    }
 
-        if(content !== newContent) {
-          // Changed test file
-          grunt.file.write(filepath, newContent);
-          // Print a success message.
-          grunt.log.writeln('File "' + filepath + '" changed.');
-        }
-      });
+    this.files.forEach(function(filepath) {
+      var searchFilepath = files_control.retrieveFileSearch(filepath, describeOption);
+
+      if(searchFilepath.length === 0) {
+        grunt.fail.warn(ERRORS[2]);
+      }
+
+      var changer = new ReplaceText(options.language, describeOption, searchFilepath);
+      changer.replace(filepath);
     });
   });
 
