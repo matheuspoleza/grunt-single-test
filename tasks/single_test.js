@@ -10,9 +10,9 @@
 
 module.exports = function(grunt) {
 
-  let FilesControl = require('./lib/FilesControl')(grunt);
-  let TextReplace = require('./lib/TextReplace')(grunt);
-  let TaskControl = require('./lib/TaskControl')(grunt);
+  let FilesSearch = require('./lib/FilesSearch')(grunt);
+  let FilesText = require('./lib/FilesText')(grunt);
+  let TaskManager = require('./lib/TaskManager')(grunt);
 
   const ERRORS = {
     1: 'Describe option is not defined.',
@@ -29,13 +29,13 @@ module.exports = function(grunt) {
     }
 
     this.files.forEach((filepath) => {
-      let searchFilepath = FilesControl.retrieveFileSearch(filepath, describeOption);
+      let searchFilepath = FilesSearch.get(filepath, describeOption);
 
       if(searchFilepath.length === 0) {
         grunt.fail.warn(ERRORS[2]);
       }
 
-      TextReplace.replace(options.language, describeOption, searchFilepath);
+      FilesText.replace(options.language, describeOption, searchFilepath);
     });
   }
 

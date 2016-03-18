@@ -20,7 +20,7 @@ module.exports = function(grunt){
     only: "describe.only('"
   };
 
-  class ReplaceText {
+  class FilesText {
     constructor() {
       this.jasmineSintax = JASMINE_SINTAX;
       this.mochaSintax = MOCHA_SINTAX;
@@ -43,5 +43,5 @@ module.exports = function(grunt){
     }
   }
 
-  return new ReplaceText();
+  return new FilesText();
 };
