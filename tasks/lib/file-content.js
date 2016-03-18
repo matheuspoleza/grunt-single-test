@@ -10,20 +10,17 @@
 
 module.exports = function(grunt){
 
-  const JASMINE_SINTAX = {
-    all: "describe('",
-    only: "fdescribe('"
-  };
+  class FileContent {
+    constructor(grunt) {
+      this.jasmineSintax = {
+        all: "describe('",
+        only: "fdescribe('"
+      };
 
-  const MOCHA_SINTAX = {
-    all: "describe('",
-    only: "describe.only('"
-  };
-
-  class FilesText {
-    constructor() {
-      this.jasmineSintax = JASMINE_SINTAX;
-      this.mochaSintax = MOCHA_SINTAX;
+      this.mochaSintax = {
+        all: "describe('",
+        only: "describe.only('"
+      };
     }
 
     replace(framework, search, filepath) {
@@ -38,10 +35,10 @@ module.exports = function(grunt){
       this.filepath = filepath;
     }
 
-    remove() {
+    removeChanges() {
       grunt.file.write(this.filepath, this.oldContent);
     }
   }
 
-  return new FilesText();
+  return new FileContent();
 };

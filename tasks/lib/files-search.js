@@ -10,13 +10,13 @@
 
 module.exports = function(grunt){
 
-  class FilesSearch {
+  class FileSearch {
     constructor() {
       this.changedFile = '';
     }
 
-    get(f, option) {
-      this.changedFile = f.src.filter( (data) => {
+    find(files, option) {
+      this.changedFile = files.src.filter( (data) => {
         let content = grunt.file.read(data);
         return content.indexOf(option) > 0;
       });
@@ -25,6 +25,5 @@ module.exports = function(grunt){
     }
   }
 
-  return new FilesSearch();
-
+  return new FileSearch();
 };

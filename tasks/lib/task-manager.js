@@ -9,6 +9,7 @@
 'use strict';
 
 module.exports = function(grunt){
+
   let eventemitter = require('events').EventEmitter;
 
   class TaskManager {
