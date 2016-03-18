@@ -10,35 +10,36 @@
 
 module.exports = function(grunt) {
 
-  var files_control = require('./lib/files_control')(grunt);
-  var ReplaceText = require('./lib/replace_text')(grunt);
+  let FilesControl = require('./lib/FilesControl')(grunt);
+  let TextReplace = require('./lib/TextReplace')(grunt);
+  let TaskControl = require('./lib/TaskControl')(grunt);
 
-  var ERRORS = {
+  const ERRORS = {
     1: 'Describe option is not defined.',
     2: 'Describe was not found. Please put a exists test.'
   };
 
-  // Register single test task
-  grunt.registerMultiTask('single_test', 'run single tests', function() {
-    var self = this;
-    var name = self.name || 'single_test';
-    var options = this.options({});
-    var describeOption = grunt.option('describe');
+  function SingleTest() {
+    let self = this;
+    let options = self.options({});
+    let describeOption = grunt.option('describe');
 
-    if(typeof grunt.option('describe') === 'undefined') {
+    if(typeof describeOption === 'undefined') {
       grunt.fail.warn(ERRORS[1]);
     }
 
-    this.files.forEach(function(filepath) {
-      var searchFilepath = files_control.retrieveFileSearch(filepath, describeOption);
+    this.files.forEach((filepath) => {
+      let searchFilepath = FilesControl.retrieveFileSearch(filepath, describeOption);
 
       if(searchFilepath.length === 0) {
         grunt.fail.warn(ERRORS[2]);
       }
 
-      var changer = new ReplaceText(options.language, describeOption, searchFilepath);
-      changer.replace(filepath);
+      TextReplace.replace(options.language, describeOption, searchFilepath);
     });
-  });
+  }
+
+  // Register single test task
+  grunt.registerMultiTask('single_test', 'run single tests', SingleTest );
 
 };
