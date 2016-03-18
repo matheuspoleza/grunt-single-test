@@ -1,6 +1,6 @@
 # grunt-single-test
 
-> The Grunt Plugin for single test runner. Works with jasmine and mocha.
+> :runner:  The Grunt Plugin for single test runner. Works with jasmine and mocha.
 
 ## Getting Started
 This plugin requires Grunt `~0.4.5`
