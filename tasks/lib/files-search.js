@@ -21,7 +21,7 @@ module.exports = function(grunt){
         return content.indexOf(option) > 0;
       });
 
-      return this.changedFile;
+      return this.changedFile[0];
     }
   }
 

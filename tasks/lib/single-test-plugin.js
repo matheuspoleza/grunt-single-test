@@ -29,5 +29,5 @@ module.exports = function(grunt){
     }
   }
 
-  return new SingleTestPlugin();
+  return SingleTestPlugin;
 }

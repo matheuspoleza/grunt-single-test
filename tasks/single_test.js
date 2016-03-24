@@ -14,7 +14,7 @@ module.exports = function(grunt) {
 
   // Register single test task
   grunt.registerMultiTask('single_test', 'run single tests', function(){
-    SingleTestPlugin().run();
+    new SingleTestPlugin(this.files, this.options({}), grunt.option('describe') ).run();
   } );
 
 };

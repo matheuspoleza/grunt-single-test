@@ -27,11 +27,12 @@ module.exports = function(grunt){
       let frameworkSintax = framework === 'jasmine' ? this.jasmineSintax : this.mochaSintax;
       let oldDescribe = frameworkSintax.all + search;
       let newDescribe = frameworkSintax.only + search;
-      let newContent  = grunt.file.read(filepath);
+      let oldContent  = grunt.file.read(filepath);
+      let newContent = oldContent.replace(oldDescribe, newDescribe)
 
       grunt.file.write(filepath, newContent);
 
-      this.oldContent = newContent.replace(oldDescribe, newDescribe);
+      this.oldContent = oldContent;
       this.filepath = filepath;
     }
 
