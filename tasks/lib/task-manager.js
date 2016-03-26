@@ -10,18 +10,21 @@
 
 module.exports = function(grunt){
 
+  let util         = require('util');
   let eventemitter = require('events').EventEmitter;
 
   class TaskManager {
-    constructor() {
+    constructor(name) {
       eventemitter.call(this);
+      this.name = name;
     }
 
-    run(name) {
-      grunt.task.run(name);
-      this.$emit('task done');
+    run() {
+      grunt.task.run(this.name);
+      this.emit('end');
     }
   }
 
-  return new TaskManager();
+  util.inherits(TaskManager, eventemitter);
+  return TaskManager;
 };

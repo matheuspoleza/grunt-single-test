@@ -32,14 +32,9 @@ module.exports = function(grunt) {
     single_test: {
       options: {
         language: 'mocha',
-        framework: 'karma'
+        testTaskName: 'karma'
       },
-      files: 'test/fixtures/**/*.js'
-    },
-
-    // Unit tests.
-    nodeunit: {
-      tests: ['test/*_test.js']
+      files: 'spec/fixtures/**/*.js'
     }
 
   });
@@ -50,13 +45,12 @@ module.exports = function(grunt) {
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-nodeunit');
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'single_test', 'nodeunit']);
+  grunt.registerTask('test', ['clean']);
 
-  grunt.registerTask('clean', ['clean']);
+  grunt.registerTask('karma', ['clean']);
 
   // By default, lint and run all tests.
   grunt.registerTask('default', ['single_test']);

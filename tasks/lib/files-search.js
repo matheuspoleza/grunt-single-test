@@ -10,18 +10,25 @@
 
 module.exports = function(grunt){
 
-  class FileSearch {
-    constructor() {
-      this.changedFile = '';
-    }
+  let glob = require('glob');
 
-    find(files, option) {
-      this.changedFile = files.src.filter( (data) => {
+  class FileSearch {
+
+    find(filesArray, option, callback) {
+      let files = filesArray;
+
+      if(typeof filesArray !== 'object'){
+        glob(filesArray, (er, f) => {
+          files = f;
+        });
+      }
+
+      let changedFile = files.filter( (data) => {
         let content = grunt.file.read(data);
         return content.indexOf(option) > 0;
       });
 
-      return this.changedFile[0];
+      callback(changedFile[0]);
     }
   }
 
