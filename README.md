@@ -1,5 +1,7 @@
 # grunt-single-test
 
+[![Built with Grunt](https://cdn.gruntjs.com/builtwith.svg)](http://gruntjs.com/)
+
 > :runner:  The Grunt Plugin for single test runner. Works with jasmine and mocha.
 
 ## Getting Started
