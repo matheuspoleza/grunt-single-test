@@ -25,7 +25,16 @@ module.exports = function(grunt) {
 
     // Before generating any new files, remove any previously-created files.
     clean: {
-      tests: ['tmp']
+      tests: ['spec/tmp']
+    },
+
+    copy : {
+      main : {
+        files : [
+           {expand: true, src: ['spec/expected/**/*.js'], dest: 'spec/tmp' },
+           {expand: true, src: ['spec/fixtures/**/*.js'], dest: 'spec/tmp' }
+        ]
+      }
     },
 
     // Configuration to be run (and then tested).
@@ -35,6 +44,17 @@ module.exports = function(grunt) {
         testTaskName: 'karma'
       },
       files: 'spec/fixtures/**/*.js'
+    },
+
+    jasmine_node: {
+      options: {
+        forceExit: true,
+        match: '.',
+        matchall: false,
+        extensions: 'js',
+        specNameMatcher: 'spec'
+      },
+      all: ['spec/']
     }
 
   });
@@ -45,10 +65,12 @@ module.exports = function(grunt) {
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-copy');
+  grunt.loadNpmTasks('grunt-jasmine-node');
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean']);
+  grunt.registerTask('test', ['copy', 'jasmine_node', 'clean']);
 
   grunt.registerTask('karma', ['clean']);
 
