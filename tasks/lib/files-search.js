@@ -14,21 +14,21 @@ module.exports = function(grunt){
 
   class FileSearch {
 
-    find(filesArray, option, callback) {
-      let files = filesArray;
+    find(files, option, callback) {
 
-      if(typeof filesArray !== 'object'){
-        glob(filesArray, (er, f) => {
-          files = f;
-        });
-      }
+      let contentMach = (data) => {
+        return grunt.file.read(data).indexOf(option) !== -1;
+      };
 
-      let changedFile = files.filter( (data) => {
-        let content = grunt.file.read(data);
-        return content.indexOf(option) > 0;
-      });
+      let getFilterContent = (err,array) => {
+        let changedFile = array.filter(contentMach);
+        callback(changedFile[0]);
+      };
 
-      callback(changedFile[0]);
+      if(typeof files === 'string')
+        glob(files, getFilterContent);
+      else
+        getFilterContent(files);
     }
   }
 
