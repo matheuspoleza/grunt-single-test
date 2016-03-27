@@ -8,7 +8,7 @@
 
 'use strict';
 
-module.exports = function(grunt) {
+module.exports = (grunt) => {
 
   let FilesSearch = require('./lib/files-search')(grunt);
   let FileContent = require('./lib/file-content')(grunt);

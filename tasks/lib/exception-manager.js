@@ -8,7 +8,7 @@
 
 'use strict';
 
-module.exports = function(grunt) {
+module.exports = (grunt) => {
 
   class ExceptionManager {
     constructor() {
@@ -32,4 +32,4 @@ module.exports = function(grunt) {
   }
 
   return new ExceptionManager();
-}
+};
