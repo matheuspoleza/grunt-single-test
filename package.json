@@ -1,7 +1,7 @@
 {
   "name": "grunt-single-test",
   "description": "The Grunt Plugin for single test runner.",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "homepage": "https://github.com/matheuspoleza/grunt-single-test",
   "author": {
     "name": "matheuspoleza",
@@ -21,7 +21,7 @@
     }
   ],
   "engines": {
-    "node": ">= 0.8.0"
+    "node": ">= 4.0"
   },
   "scripts": {
     "test": "grunt test"
