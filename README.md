@@ -25,33 +25,32 @@ grunt.loadNpmTasks('grunt-single-test');
 ## The "single_test" task
 
 ### Overview
-In your project's Gruntfile, add a section named `single_test` to the data object passed into `grunt.initConfig()`.
+In your project's Gruntfile, add a section named `single_test` to the data object passed into `grunt.initConfig()`. This is the required config.
 
 ```js
 grunt.initConfig({
   single_test: {
     options: {
-      framework : 'jasmine or mocha'
+      language : 'jasmine or mocha',
+      testTaskName: 'name_of_your_grunt_spec_task'
     },
-    files: ['path_to_your_tests/**/*.js'],
+    files: 'path_to_your_tests/**/*.js',
   },
 });
 ```
 
 ### Options
 
-#### options.framework
+#### options.language
 Type: `String`
 Default value: `jasmine`
 
 A string value that is used set framework tests language.
 
-### Console params
-
-#### --describe
+### options.testTaskName
 Type: `String`
 
-A string value that is used grep describe text. Default value is empty and nothing happens.
+A string value that is used by run your grunt test task. This is field is required. If not passed grunt-single-test will only change your tests sintax.
 
 ### Usage Examples
 
@@ -59,21 +58,22 @@ A string value that is used grep describe text. Default value is empty and nothi
 grunt.initConfig({
   single_test: {
     options: {
-      framework: 'jasmine'
+      language: 'jasmine',
+      testTaskName: 'test'
     },
-    files: ['spec/**/*.js'],
+    files: 'spec/**/*.js',
   },
 });
 ```
 
 ```js
+grunt.registerTask('test', ['karma']);
 grunt.registerTask('single', ['single_test']);
 ```
 
 ```js
-grunt --describe='First Test'
+grunt single --describe='First Test'
 ```
-
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
