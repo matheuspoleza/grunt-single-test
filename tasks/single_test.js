@@ -25,6 +25,7 @@ module.exports = (grunt) => {
 
     specTask.on('end', () => {
       FileContent.removeChanges();
+      done();
     });
 
     FilesSearch.find(singleTestConfig.files, commandLineArg, (searchFilepath) => {
