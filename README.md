@@ -1,6 +1,9 @@
 # grunt-single-test
 
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.svg)](http://gruntjs.com/)
+[![Build Status](https://travis-ci.org/matheuspoleza/grunt-single-test.svg?branch=master)](https://travis-ci.org/matheuspoleza/grunt-single-test)
+[![Dependency Status](https://david-dm.org/matheuspoleza/grunt-single-test.svg)](https://david-dm.org/matheuspoleza/grunt-single-test.js)
+[![devDependency Status](https://david-dm.org/ContaAzul/creditcard.js/dev-status.svg)](https://david-dm.org/matheuspoleza/grunt-single-test#info=devDependencies)
 
 > :runner:  The Grunt Plugin for single test runner. Works with jasmine and mocha.
 
